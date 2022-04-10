@@ -8,13 +8,14 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
+import img from "../assets/banner5.jpg";
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-  ${mobile({ padding: "10px", flexDirection: "column"})};
+  ${mobile({ padding: "10px", flexDirection: "column" })};
 `;
 
 const ImgContainer = styled.div`
@@ -25,13 +26,13 @@ const Image = styled.img`
   width: 100%;
   height: 90vh;
   object-fit: cover;
-  ${mobile({ height: "40vh"})};
+  ${mobile({ height: "40vh" })};
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0px 50px;
-  ${mobile({ padding: "10px"})};
+  ${mobile({ padding: "10px" })};
 `;
 
 const Title = styled.h1`
@@ -52,7 +53,7 @@ const FilterContainer = styled.div`
   margin: 30px 0px;
   display: flex;
   justify-content: space-between;
-  ${mobile({ width: "100%"})};
+  ${mobile({ width: "100%" })};
 `;
 
 const Filter = styled.div`
@@ -86,7 +87,7 @@ const AddContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobile({ width: "100%"})};
+  ${mobile({ width: "100%" })};
 `;
 
 const AmountContainer = styled.div`
@@ -112,38 +113,38 @@ const Button = styled.button`
   background-color: white;
   cursor: pointer;
   font-weight: 500;
-  &:hover{
-      background-color: #f8f4f4;
+  &:hover {
+    background-color: #f8f4f4;
   }
 `;
 
 const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-const [product,setProduct] = useState({});
+  console.log(id);
 
-useEffect(()=>{
-  const getProduct = async ()=>{
-    try{
-      const res = await publicRequest.get("/products/find/" +  id);
-      setProduct(res.data);
-    }catch{}
-  };
-  getProduct()
-},[id])
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
+      } catch {}
+    };
+    getProduct();
+  }, [id]);
 
   return (
     <Container>
       <Navbar />
       <Wrapper>
         <ImgContainer>
-          <Image src="/product.img" />
+          <Image src={img} />
         </ImgContainer>
         <InfoContainer>
           <Title>{product.title}</Title>
-          <Desc>
-            {product.desc}
-          </Desc>
+          <Desc>{product.desc}</Desc>
           <Price>{product.price}</Price>
           <FilterContainer>
             {/* <Filter>
@@ -154,19 +155,16 @@ useEffect(()=>{
             </Filter> */}
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
-                {product.size}
-              </FilterSize>
+              <FilterSize>{product.size}</FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
-
-              <AmountContainer>
-                  <Remove/>
-                  <Amount>1</Amount>
-                  <Add/>
-              </AmountContainer>
-              <Button>ADD TO CART</Button>
+            <AmountContainer>
+              <Remove />
+              <Amount>1</Amount>
+              <Add />
+            </AmountContainer>
+            <Button>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
