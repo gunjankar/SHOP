@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
 import img from "../assets/banner5.jpg";
+import { popularProducts, medicines, covidEssentials, babyCare } from "../data";
 
 const Container = styled.div``;
 
@@ -120,10 +121,22 @@ const Button = styled.button`
 
 const Product = () => {
   const location = useLocation();
-  const id = location.pathname.split("/")[2];
+  const category = location.pathname.split("/")[2];
+  const id = location.pathname.split("/")[3];
   console.log(id);
+  console.log(category);
 
+  const completeData = {};
+  completeData["popularProducts"] = popularProducts;
+  completeData["medicines"] = medicines;
+  completeData["covid%20essentials"] = covidEssentials;
+  completeData["babyCare"] = babyCare;
+  console.log(completeData);
+  console.log(completeData[category]);
   const [product, setProduct] = useState({});
+  useEffect(() => {
+    setProduct(completeData[category].find((o) => o.id == id));
+  }, []);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -140,7 +153,7 @@ const Product = () => {
       <Navbar />
       <Wrapper>
         <ImgContainer>
-          <Image src={img} />
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
           <Title>{product.title}</Title>

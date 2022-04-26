@@ -128,10 +128,12 @@ export const covidEssentials = [
     id: 1,
     img: "/id1.jpg",
     title: "N-95 Mask",
+    desc: "This is an N-95 mask",
   },
   {
     id: 2,
     img: "/id2.jpg",
+    desc: "This is item 2",
   },
   {
     id: 3,

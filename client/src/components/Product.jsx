@@ -69,7 +69,8 @@ const Icon = styled.div`
   }
 `;
 
-const Product = ({ item }) => {
+const Product = ({ item, cat }) => {
+  console.log(cat);
   return (
     <Container>
       <Circle />
@@ -79,7 +80,7 @@ const Product = ({ item }) => {
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
-          <Link to={`/product/${item.id}`}>
+          <Link to={`/product/${cat}/${item.id}`}>
             <SearchOutlined />
           </Link>
         </Icon>
