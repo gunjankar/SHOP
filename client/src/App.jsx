@@ -27,12 +27,12 @@ const App = () => {
 
         <Route
           path="/login"
-          element={user ? <Navigate replace to="/" /> : <Login />}
+          element={user ? <Login /> : <Navigate replace to="/" />}
         ></Route>
 
         <Route
           path="/register"
-          element={user ? <Navigate replace to="/" /> : <Register />}
+          element={user ? <Register /> : <Navigate replace to="/" />}
         ></Route>
       </Routes>
     </Router>

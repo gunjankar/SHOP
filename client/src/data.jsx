@@ -39,7 +39,7 @@ export const categories = [
   },
   {
     id: 2,
-    img: "category2.jpeg",
+    img: "category3.jpeg",
     //title: "DAILY-FLASH SALE!!",
     bg: "fcf1ed",
     cat: "babycare",
@@ -91,73 +91,73 @@ export const popularProducts = [
 export const babyCare = [
   {
     id: 1,
-    img: "/bc1.jpg",
+    img: "/img1.jpg",
   },
   {
     id: 2,
-    img: "/bc1.jpg",
+    img: "/img2.jpg",
   },
   {
     id: 3,
-    img: "/bc1.jpg",
+    img: "/img3.jpg",
   },
   {
     id: 4,
-    img: "/bc1.jpg",
+    img: "/img4.jfif",
   },
   {
     id: 5,
-    img: "/bc1.jpg",
+    img: "/img5.jpg",
   },
   {
     id: 6,
-    img: "/bc1.jpg",
+    img: "/img6.png",
   },
   {
     id: 7,
-    img: "/bc1.jpg",
+    img: "/img7.jpg",
   },
   {
     id: 8,
-    img: "/bc1.jpg",
+    img: "/img8.jpg",
   },
 ];
 
 export const covidEssentials = [
   {
     id: 1,
-    img: "/id1.jpg",
+    img: "/cov1.jpg",
     title: "N-95 Mask",
     desc: "This is an N-95 mask",
   },
   {
     id: 2,
-    img: "/id2.jpg",
+    img: "/cov2.jpg",
     desc: "This is item 2",
   },
   {
     id: 3,
-    img: "/id3.jpg",
+    img: "/cov3.jpg",
   },
   {
     id: 4,
-    img: "/id4.jpg",
+    img: "/cov4.jpg",
   },
   {
     id: 5,
-    img: "/id5.jpg",
+    img: "/cov5.jpg",
   },
   {
     id: 6,
-    img: "/id6.jpg",
+    img: "/cov6.jpeg",
   },
   {
     id: 7,
-    img: "/id7.jpg",
+    img: "/cov7.jpg",
   },
   {
     id: 8,
-    img: "/id8.jpg",
+    img: "/cov8.jpg",
   },
 ];
 
@@ -199,6 +199,34 @@ export const covidEssentials = [
 export const medicines = [
   {
     id: 1,
-    img: "/id8.jpg",
+    img: "/med1.jpeg",
+  },
+  {
+    id: 2,
+    img: "/med2.jpg",
+  },
+  {
+    id: 3,
+    img: "/med3.jpg",
+  },
+  {
+    id: 4,
+    img: "/med4.jpg",
+  },
+  {
+    id: 5,
+    img: "/med5.jpg",
+  },
+  {
+    id: 6,
+    img: "/med6.jpg",
+  },
+  {
+    id: 7,
+    img: "/med7.jpg",
+  },
+  {
+    id: 8,
+    img: "/med8.jpg",
   },
 ];
