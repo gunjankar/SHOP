@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
 import img from "../assets/banner5.jpg";
 import { popularProducts, medicines, covidEssentials, babyCare } from "../data";
+import axios from "axios";
 
 const Container = styled.div``;
 
@@ -148,6 +149,48 @@ const Product = () => {
     getProduct();
   }, [id]);
 
+  const addtoCart = () => {
+    console.log("Item added");
+    const data = {
+      userId: localStorage.getItem("userId"),
+      products: [{ productId: product.id, category: category }],
+    };
+
+    axios({
+      url: "http://localhost:8000/api/carts/",
+      method: "POST",
+      data: data,
+      headers: {
+        token: localStorage.getItem("token")
+          ? `Bearer ${localStorage.getItem("token")}`
+          : "",
+      },
+
+      // url: "http://localhost:5000/login"
+    })
+      .then((response) => {
+        console.log("Response is :", response);
+        // localStorage.setItem("token", response.data.acessToken);
+        // localStorage.setItem("userId", response.data._id);
+        //   if (response.data.user) {
+        //     //Authentication done.
+        //     setuser_info(response.data.user);
+        //     localStorage.setItem("token", response.data.jwt_token);
+        //     // console.log(response.data.user)
+        //     localStorage.setItem("user", JSON.stringify(response.data.user));
+        // history.push({ pathname: "/" });
+        //   } else {
+        //     setinfo(response.data);
+        //   }
+        // console.log("Response :",response)
+      })
+      .catch((error) => {
+        //   setloading(false);
+        console.log(error);
+        console.log("Error occured");
+      });
+  };
+
   return (
     <Container>
       <Navbar />
@@ -177,7 +220,7 @@ const Product = () => {
               <Amount>1</Amount>
               <Add />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={addtoCart}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
