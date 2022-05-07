@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
-
+import Navbar from "../components/Navbar";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -99,30 +99,33 @@ const Register = () => {
       });
   };
   return (
-    <Container>
-      <div>
-        <img src="ban.jpg"></img>
-      </div>
-      <Wrapper>
-        <Title>Welcome to PharmaCare!</Title>
-        <Title>Create Account</Title>
-        <br></br>
+    <>
+      <Navbar />
+      <Container>
         <div>
-          <Input id="username" placeholder="username" />
-          <br></br>
-          <Input id="email" placeholder="email" />
-          <br></br>
-          <Input id="password" placeholder="Password" />
-          <br></br>
-          <Agreement>
-            By creating an account, I consent to the processing of my personal
-            data in acordance with the <b>PRIVACY POLICY</b>
-          </Agreement>
-          <br></br>
-          <Button onClick={createNewUser}>CREATE</Button>
+          <img src="ban.jpg"></img>
         </div>
-      </Wrapper>
-    </Container>
+        <Wrapper>
+          <Title>Welcome to PharmaCare!</Title>
+          <Title>Create Account</Title>
+          <br></br>
+          <div>
+            <Input id="username" placeholder="username" />
+            <br></br>
+            <Input id="email" placeholder="email" />
+            <br></br>
+            <Input id="password" placeholder="Password" />
+            <br></br>
+            <Agreement>
+              By creating an account, I consent to the processing of my personal
+              data in acordance with the <b>PRIVACY POLICY</b>
+            </Agreement>
+            <br></br>
+            <Button onClick={createNewUser}>CREATE</Button>
+          </div>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 
