@@ -57,34 +57,42 @@ export const popularProducts = [
   {
     id: 1,
     img: "/id1.jpg",
+    price: 100,
   },
   {
     id: 2,
     img: "/id2.jpg",
+    price: 200,
   },
   {
     id: 3,
     img: "/id3.jpg",
+    price: 300,
   },
   {
     id: 4,
     img: "/id4.jpg",
+    price: 400,
   },
   {
     id: 5,
     img: "/id5.jpg",
+    price: 500,
   },
   {
     id: 6,
     img: "/id6.jpg",
+    price: 600,
   },
   {
     id: 7,
     img: "/id7.jpg",
+    price: 100,
   },
   {
     id: 8,
     img: "/id8.jpg",
+    price: 100,
   },
 ];
 

@@ -160,6 +160,7 @@ const Button = styled.button`
 
 const Cart = () => {
   const [products, setProducts] = useState();
+  const [total, setTotal] = useState(0);
 
   const completeData = {};
   completeData["popularProducts"] = popularProducts;
@@ -189,6 +190,9 @@ const Cart = () => {
           const more_info = completeData[item.products[0].category].find(
             (o) => o.id == item.products[0].productId
           );
+          console.log(total);
+          console.log(more_info.price);
+          setTotal(total + more_info.price);
           totalItems.push(
             <Info>
               <Product>
@@ -214,7 +218,7 @@ const Cart = () => {
                     {/* <ProductAmount>{product.quantity}</ProductAmount> */}
                     <Remove />
                   </ProductAmountConatiner>
-                  <ProductPrice>Rs.100/-</ProductPrice>
+                  <ProductPrice>{more_info.price}</ProductPrice>
                 </PriceDetail>
               </Product>
               <Hr />
@@ -259,7 +263,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>Rs.260/-</SummaryItemPrice>
+              <SummaryItemPrice>{total}</SummaryItemPrice>
             </SummaryItem>
             <Button>Checkout Now</Button>
           </Summary>
