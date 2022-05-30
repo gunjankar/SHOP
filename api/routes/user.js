@@ -51,7 +51,8 @@ router.get("/find/:id", verifyTokenAndAdmin, async(req,res)=>{
 });
 
 //GET ALL USERS
-router.get("/", verifyTokenAndAdmin, async(req,res)=>{
+router.get("/",  async(req,res)=>{
+    console.log("hi");
     const query = req.query.new
     try{
         const user = query ? await user.find().sort({_id:-1}).limit(1) : await User.find();
@@ -61,8 +62,9 @@ router.get("/", verifyTokenAndAdmin, async(req,res)=>{
     }
 });
 
+
 //GET USERS STATS
-router.get("/stats",verifyTokenAndAdmin, async(req,res)=>{
+router.get("/stats", async(req,res)=>{
     const date = new Date();
     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));//return us the last year
     try{
