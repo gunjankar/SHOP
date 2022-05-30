@@ -53,7 +53,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async(req, res) => {
 });
 
 // //GET ALL ORDERS
-router.get("/", verifyTokenAndAdmin, async(req, res) => {
+router.get("/", async(req, res) => {
     try {
 
         const orders = await Order.find();
@@ -65,14 +65,19 @@ router.get("/", verifyTokenAndAdmin, async(req, res) => {
 
 //GET MONTHLY INCOME
 
-router.get("/income", verifyTokenAndAdmin, async(req, res) => {
+router.get("/income", async(req, res) => {
+    const productId = req.query.pid;
     const date = new Date();//1st sept
     const lastMonth = new Date(date.setMonth(date.getMonth() - 1));//1st aug
     const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));//1st jul
 
     try {
         const income = await Order.aggregate([
-            { $match: { createdAt: { $gte: previousMonth } } },//plus 2 months
+            { $match: { createdAt: { $gte: previousMonth }, ...Order(productId && {
+                products:{ $elementMatch: { productId} },
+            }),
+        },
+     },//plus 2 months
             {
                 $project: {
                     month: { $month: "$createdAt" },

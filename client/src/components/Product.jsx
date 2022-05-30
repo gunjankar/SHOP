@@ -90,6 +90,6 @@ const Product = ({ item, cat }) => {
       </Info>
     </Container>
   );
-};
+};      
 
 export default Product;

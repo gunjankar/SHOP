@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 // import Announcement from '../components/Announcement'
+
 import Footer from "../components/Footer";
 import styled from "styled-components";
 import { Add, Remove } from "@material-ui/icons";
@@ -7,6 +8,9 @@ import { mobile } from "../responsive";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { popularProducts, medicines, covidEssentials, babyCare } from "../data";
+import StripeCheckout from "react-stripe-checkout";
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
 
@@ -167,6 +171,11 @@ const Cart = () => {
   completeData["medicines"] = medicines;
   completeData["covid%20essentials"] = covidEssentials;
   completeData["babyCare"] = babyCare;
+  const [stripeToken,setStripeToken]=useState(null)
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+  console.log(stripeToken)
 
   useEffect(() => {
     axios({
@@ -265,7 +274,18 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>{total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>Checkout Now</Button>
+            <StripeCheckout name="PharmaCare"
+            image="logo.png"
+            billingAddress
+            shippingAddress
+              description={`Your total is Rs.${total}`}
+            amount={total}
+            token={onToken}
+            stripeKey={KEY}
+        >
+
+            <Button>CHECKOUT NOW</Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>
