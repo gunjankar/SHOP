@@ -8,10 +8,10 @@ const Orders = () => {
   const [saveOrder, setsaveOrder] = useState();
   useEffect(() => {
     axios({
-      // url: `http://localhost:8000/api/orders/find/${localStorage.getItem(
-      //   "userId"
-      // )}`,
-      url: `http://localhost:8000/api/orders/`,
+      url: `http://localhost:8000/api/orders/find/${localStorage.getItem(
+        "userId"
+      )}`,
+      // url: `http://localhost:8000/api/orders/`,
       method: "GET",
     })
       .then((data) => {
