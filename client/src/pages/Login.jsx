@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import axios from "axios";
-// import { useHistory } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import { useToasts } from "react-toast-notifications";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -58,7 +60,8 @@ const Button = styled.button`
 const Link = styled.a``;
 
 const Login = () => {
-  //   const history = useHistory();
+  const navigate = useNavigate();
+  const { addToast } = useToasts();
   const loginUser = () => {
     console.log("Logging in new user !!!");
     console.log(document.getElementById("username").value);
@@ -77,8 +80,13 @@ const Login = () => {
     })
       .then((response) => {
         console.log("Response is :", response);
+        addToast("You are logged in now !", {
+          appearance: "success",
+          // autoDismiss: true,
+        });
         localStorage.setItem("token", response.data.acessToken);
         localStorage.setItem("userId", response.data._id);
+        navigate("/");
         //   if (response.data.user) {
         //     //Authentication done.
         //     setuser_info(response.data.user);
@@ -95,29 +103,36 @@ const Login = () => {
         //   setloading(false);
         console.log(error);
         console.log("Error occured");
+        addToast("Oops ! Error Occured", {
+          appearance: "error",
+          // autoDismiss: true,
+        });
       });
   };
   return (
-    <Container>
-      <div>
-        <img src="banner1.jpg"></img>
-      </div>
-      <Wrapper>
-        <Title>Login To Your Account</Title>
-        <br></br>
+    <>
+      <Navbar />
+      <Container>
         <div>
-          <Input id="username" placeholder="Username" />
-          <br></br>
-          <Input id="password" placeholder="Password" />
-          <br></br>
-          <Button onClick={loginUser}>LOGIN</Button>
-          <br></br>
-          <Link>DO NOT REMEMBER THE PASSWORD?</Link>
-          <br></br>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <img src="banner1.jpg"></img>
         </div>
-      </Wrapper>
-    </Container>
+        <Wrapper>
+          <Title>Login To Your Account</Title>
+          <br></br>
+          <div>
+            <Input id="username" placeholder="Username" />
+            <br></br>
+            <Input id="password" placeholder="Password" />
+            <br></br>
+            <Button onClick={loginUser}>LOGIN</Button>
+            <br></br>
+            <Link>DO NOT REMEMBER THE PASSWORD?</Link>
+            <br></br>
+            <Link>CREATE A NEW ACCOUNT</Link>
+          </div>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 

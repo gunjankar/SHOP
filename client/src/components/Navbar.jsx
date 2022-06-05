@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 //import { Badge } from '@material-ui/core';
 import { AddShoppingCartOutlined, Search } from "@material-ui/icons";
@@ -79,6 +79,18 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("userId")) {
+      setLoggedIn(true);
+    }
+  }, []);
+  const signout = () => {
+    localStorage.removeItem("userId");
+    console.log("Logged out");
+    setLoggedIn(false);
+  };
   return (
     <Container style={{ backgroundColor: "#00c2cb" }}>
       <Wrapper>
@@ -89,24 +101,48 @@ const Navbar = () => {
             <Search style={{ color: "white", fontSize: 23 }} />
           </SearchContainer>
         </Left>
-        <Center>
-          <Logo>Pharmacare</Logo>
-        </Center>
-        <Right>
-          <Link to={"/register"}>
-            <MenuItem>REGISTER</MenuItem>
-          </Link>
-          <Link to={"/login"}>
-            <MenuItem>SIGN IN</MenuItem>
-          </Link>
-          <MenuItem>
-            <Link to={"/cart"}>
-              <Badge badgeContent={0} color="primary">
-                <AddShoppingCartOutlined />
-              </Badge>
-            </Link>
-          </MenuItem>
-        </Right>
+        <Link to={"/"}>
+          <Center>
+            <Logo>Pharmacare</Logo>
+          </Center>
+        </Link>
+        {loggedIn ? (
+          <>
+            <Right>
+              <Link to={"/my-orders"}>
+                <MenuItem>My Orders</MenuItem>
+              </Link>
+            </Right>
+            <MenuItem>
+              <Link to={"/cart"}>
+                <Badge badgeContent={0} color="primary">
+                  <AddShoppingCartOutlined />
+                </Badge>
+              </Link>
+            </MenuItem>
+            <div onClick={signout}>
+              <MenuItem>SIGN OUT</MenuItem>
+            </div>
+          </>
+        ) : (
+          <>
+            <Right>
+              <Link to={"/register"}>
+                <MenuItem>REGISTER</MenuItem>
+              </Link>
+              <Link to={"/login"}>
+                <MenuItem>SIGN IN</MenuItem>
+              </Link>
+              <MenuItem>
+                <Link to={"/cart"}>
+                  <Badge badgeContent={0} color="primary">
+                    <AddShoppingCartOutlined />
+                  </Badge>
+                </Link>
+              </MenuItem>
+            </Right>
+          </>
+        )}
       </Wrapper>
     </Container>
   );

@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import { useToasts } from "react-toast-notifications";
+import { useNavigate } from "react-router-dom";
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -61,6 +64,9 @@ const Agreement = styled.span`
 `;
 
 const Register = () => {
+  const { addToast } = useToasts();
+  const navigate = useNavigate();
+
   const createNewUser = () => {
     console.log("Creating new user !!!");
     console.log(document.getElementById("username").value);
@@ -80,6 +86,11 @@ const Register = () => {
     })
       .then((response) => {
         console.log("Response is :", response);
+        addToast("Registartion Successful !", {
+          appearance: "success",
+          // autoDismiss: true,
+        });
+        navigate("/login");
         //   if (response.data.user) {
         //     //Authentication done.
         //     setuser_info(response.data.user);
@@ -96,6 +107,10 @@ const Register = () => {
         //   setloading(false);
         console.log(error);
         console.log("Error occured");
+        addToast("Oops ! Error Occured", {
+          appearance: "error",
+          // autoDismiss: true,
+        });
       });
   };
   return (
