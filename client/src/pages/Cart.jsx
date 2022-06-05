@@ -165,7 +165,7 @@ const Button = styled.button`
 const Cart = () => {
   const [products, setProducts] = useState();
   const [total, setTotal] = useState(0);
-
+  const [myitems, setmyItems] = useState();
   const completeData = {};
   completeData["popularProducts"] = popularProducts;
   completeData["medicines"] = medicines;
@@ -194,6 +194,7 @@ const Cart = () => {
         const totalItems = [];
         // setProduct(res.data.products[0]);
         // console.log(product);
+        setmyItems(res.data);
         res.data.map((item) => {
           console.log(item);
           const more_info = completeData[item.products[0].category].find(
@@ -241,6 +242,32 @@ const Cart = () => {
         console.log(err);
       });
   }, []);
+
+  const saveOrder = () => {
+    console.log("Saving order");
+    axios({
+      url: "http://localhost:8000/api/orders/",
+      method: "POST",
+      data: {
+        userId: localStorage.getItem("userId"),
+        products: myitems,
+        amount: 100,
+        address: "IND",
+        status: "completed",
+      },
+      headers: {
+        token: localStorage.getItem("token")
+          ? `Bearer ${localStorage.getItem("token")}`
+          : "",
+      },
+    })
+      .then(() => {
+        console.log("Saved");
+      })
+      .catch(() => {
+        console.log("Error");
+      });
+  };
   return (
     <Container>
       <Navbar />
@@ -286,7 +313,7 @@ const Cart = () => {
             >
               <Button>CHECKOUT NOW</Button>
             </StripeCheckout> */}
-            <Button>CHECKOUT NOW</Button>
+            <Button onClick={saveOrder}>CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>
