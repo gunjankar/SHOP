@@ -171,11 +171,11 @@ const Cart = () => {
   completeData["medicines"] = medicines;
   completeData["covid%20essentials"] = covidEssentials;
   completeData["babyCare"] = babyCare;
-  const [stripeToken,setStripeToken]=useState(null)
+  const [stripeToken, setStripeToken] = useState(null);
   const onToken = (token) => {
     setStripeToken(token);
   };
-  console.log(stripeToken)
+  console.log(stripeToken);
 
   useEffect(() => {
     axios({
@@ -274,18 +274,19 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>{total}</SummaryItemPrice>
             </SummaryItem>
-            <StripeCheckout name="PharmaCare"
-            image="logo.png"
-            billingAddress
-            shippingAddress
+            {/* <StripeCheckout
+              name="PharmaCare"
+              image="logo.png"
+              billingAddress
+              shippingAddress
               description={`Your total is Rs.${total}`}
-            amount={total}
-            token={onToken}
-            stripeKey={KEY}
-        >
-
+              amount={total}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <Button>CHECKOUT NOW</Button>
+            </StripeCheckout> */}
             <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>

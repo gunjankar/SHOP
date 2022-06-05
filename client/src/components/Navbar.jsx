@@ -101,9 +101,11 @@ const Navbar = () => {
             <Search style={{ color: "white", fontSize: 23 }} />
           </SearchContainer>
         </Left>
-        <Center>
-          <Logo>Pharmacare</Logo>
-        </Center>
+        <Link to={"/"}>
+          <Center>
+            <Logo>Pharmacare</Logo>
+          </Center>
+        </Link>
         {loggedIn ? (
           <>
             <Right>
